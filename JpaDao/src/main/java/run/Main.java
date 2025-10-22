@@ -24,7 +24,7 @@ public class Main {
 
     public static void listarAutores() {
         System.out.println("Registro Almacenados:");
-        List<Autor> autores = dao.getALL("autores.All", Autor.class);
+        List<Autor> autores = dao.getAll("autores.All", Autor.class);
         autores.forEach(autor -> System.out.println(autor.getNombre()));
     }
 
