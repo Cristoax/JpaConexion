@@ -3,7 +3,7 @@ package services.dao.interfaces;
 import java.util.List;
 
 public interface ICRUD {
-    <T> List<T> getALL(String nameQuery, Class<T> clazz);
+    <T> List<T> getAll(String nameQuery, Class<T> clazz);
     <T> void insert(T entity);
     <T> void update(T entity);
     <T> void delete(T entity);
