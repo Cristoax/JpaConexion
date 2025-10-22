@@ -1,0 +1,56 @@
+package run;
+
+import entities.Autor;
+import services.dao.dao.MyDao;
+import services.dao.interfaces.ICRUD;
+import util.JPAConexion;
+import java.util.List;
+
+public class Main {
+
+    public static final ICRUD dao = new MyDao();
+
+    public static void insertarAutor() {
+        Autor a = new Autor();
+        a.setNombre("Gabriel Garcia Marquez");
+        a.setNacionalidad("Mexicana");
+        dao.insert(a);
+
+        Autor r = new Autor();
+        r.setNombre("Ruben Dario");
+        r.setNacionalidad("Nicaraguense");
+        dao.insert(r);
+    }
+
+    public static void listarAutores() {
+        System.out.println("Registro Almacenados:");
+        List<Autor> autores = dao.getALL("autores.All", Autor.class);
+        autores.forEach(autor -> System.out.println(autor.getNombre()));
+    }
+
+    public static void editarAutor() {
+        Autor a = (Autor) dao.findById(1, Autor.class);
+        if (a != null) {
+            a.setNacionalidad("Colombiana");
+            dao.update(a);
+        }
+    }
+
+    public static void eliminarAutor() {
+        Autor a = (Autor) dao.findById(2, Autor.class);
+        if (a != null) {
+            dao.delete(a);
+        }
+    }
+
+    public static void main(String[] args) {
+        insertarAutor();
+        listarAutores();
+        editarAutor();
+        listarAutores();
+        eliminarAutor();
+        listarAutores();
+
+        JPAConexion.close();
+    }
+}
